@@ -1,0 +1,4 @@
+rootProject.name='AndroidCleanArchitectureDemo'
+include ':data'
+include ':domain'
+include ':presentation'
