@@ -67,6 +67,8 @@ dependencies {
     /*third party library*/
     implementation "org.koin:koin-androidx-viewmodel:$koin_version"
     implementation 'androidx.lifecycle:lifecycle-process:2.3.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.viewpager:viewpager:1.0.0'
 
     testImplementation 'junit:junit:4.12'
     testImplementation "org.koin:koin-test:$koin_version"

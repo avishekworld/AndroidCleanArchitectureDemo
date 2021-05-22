@@ -1,6 +1,6 @@
 package com.example.data.di
 
-import com.example.data.api.UserProfileApiImpl
+import com.example.data.api.*
 import com.example.data.cache.UserProfileCache
 import com.example.data.cache.UserProfileCacheInMemory
 import com.example.data.repository.UserProfileRepositoryImpl
@@ -22,5 +22,13 @@ val dataModule = module {
 
     single<UserProfileRepository> {
         UserProfileRepositoryImpl(get(), get())
+    }
+
+    single<OnBoardDataApi> {
+        OnBoardDataApiImpl()
+    }
+
+    single<OnBoardDataRepository> {
+        OnBoardDataRepositoryImpl(get())
     }
 }
