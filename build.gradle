@@ -19,6 +19,11 @@ buildscript {
     ext.android_x_kotlin_ext = '1.3.2'
     ext.android_x_lifecycle_version = "2.2.0"
     ext.constraint_layout_version = "2.0.4"
+    ext.card_layout_version = "1.0.0"
+
+    //play services
+    ext.google_play_services_location_version = "18.0.0"
+    ext.google_play_services_maps_version = "17.0.1"
 
     /*jetpack*/
     ext.lifecycle_version = "2.2.0"
@@ -37,13 +42,20 @@ buildscript {
         jcenter()
         
     }
+
     dependencies {
         classpath 'com.android.tools.build:gradle:4.1.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.google.gms:google-services:4.3.8'
+        classpath "com.google:plugin:0.6"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
+}
+
+plugins {
+    id("com.google.secrets_gradle_plugin") version "0.6"
 }
 
 allprojects {

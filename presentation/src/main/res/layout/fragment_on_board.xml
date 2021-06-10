@@ -21,7 +21,7 @@
             android:id="@+id/description_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/hello_blank_fragment"
+            android:text=""
             android:textColor="@color/cardview_light_background"
             android:gravity="center"
             android:layout_margin="20dp"

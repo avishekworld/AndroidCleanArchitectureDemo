@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+/*apply plugin: 'com.google.gms.google-services'*/
+apply plugin: "com.google.secrets_gradle_plugin"
 
 android {
     compileSdkVersion compile_sdk_version
@@ -57,12 +59,18 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
     implementation "androidx.fragment:fragment-ktx:$fragment_ktx_version"
     implementation "com.google.android.material:material:$android_material_version"
+    implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
+    implementation "androidx.cardview:cardview:$card_layout_version"
 
+    //kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "androidx.core:core-ktx:$android_x_kotlin_ext"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutine_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutine_version"
-    implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
+
+    //google play services
+    implementation "com.google.android.gms:play-services-location:$google_play_services_location_version"
+    implementation "com.google.android.gms:play-services-maps:$google_play_services_maps_version"
 
     /*third party library*/
     implementation "org.koin:koin-androidx-viewmodel:$koin_version"
