@@ -7,9 +7,7 @@ import io.mockk.mockk
 import junit.framework.TestCase
 import kotlinx.coroutines.runBlocking
 
-
 class GetUseProfileUseCaseTest : TestCase() {
-
 
     fun testRun() = runBlocking {
         val userProfile = mockk<UserProfile>()

@@ -16,14 +16,15 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  */
 class OnBoardFragment : Fragment() {
 
-    private lateinit var binding : FragmentOnBoardBinding
-    private val viewModel : OnBoardViewModel by viewModel()
-    private val viewID : Int by lazy {
+    private lateinit var binding: FragmentOnBoardBinding
+    private val viewModel: OnBoardViewModel by viewModel()
+    private val viewID: Int by lazy {
         arguments?.getInt(VIEW_ID) ?: 0
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentOnBoardBinding.inflate(inflater)
@@ -42,15 +43,15 @@ class OnBoardFragment : Fragment() {
         viewModel.handleEvent(OnBoardViewModel.OnBoardEvent.Init(viewID))
     }
 
-    private fun renderProcessingView(state : OnBoardViewModel.ProcessingViewState) {
+    private fun renderProcessingView(state: OnBoardViewModel.ProcessingViewState) {
         when (state) {
             is OnBoardViewModel.ProcessingViewState.Hide -> binding.progressBar.visibility = View.GONE
             is OnBoardViewModel.ProcessingViewState.Show -> binding.progressBar.visibility = View.VISIBLE
         }
     }
 
-    private fun renderContentView(state : OnBoardViewModel.ContentViewState) {
-        when(state) {
+    private fun renderContentView(state: OnBoardViewModel.ContentViewState) {
+        when (state) {
             is OnBoardViewModel.ContentViewState.Hide -> binding.contentView.visibility = View.GONE
             is OnBoardViewModel.ContentViewState.Show -> {
                 binding.contentView.visibility = View.VISIBLE

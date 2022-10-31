@@ -62,27 +62,22 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
     implementation "androidx.cardview:cardview:$card_layout_version"
 
-    //kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "androidx.core:core-ktx:$android_x_kotlin_ext"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutine_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutine_version"
-
     //google play services
     implementation "com.google.android.gms:play-services-location:$google_play_services_location_version"
     implementation "com.google.android.gms:play-services-maps:$google_play_services_maps_version"
 
+    // Dependency Injection
+    implementation "io.insert-koin:koin-androidx-viewmodel:$koin_version"
+
     /*third party library*/
-    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
     implementation 'androidx.lifecycle:lifecycle-process:2.3.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.viewpager:viewpager:1.0.0'
 
     testImplementation 'junit:junit:4.12'
-    testImplementation "org.koin:koin-test:$koin_version"
     testImplementation "io.mockk:mockk:$mockk_version"
+    testImplementation "io.insert-koin:koin-test:$koin_version"
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    androidTestImplementation "org.koin:koin-test:$koin_version"
 }

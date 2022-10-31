@@ -6,8 +6,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.cleanarchitecturedemo.databinding.ActivityOnBoardBinding
 
 class OnBoardActivity : AppCompatActivity() {
-    private lateinit var viewPager : ViewPager2
-    private lateinit var viewPagerAdapter : OnBoardingViewPagerAdapter
+    private lateinit var viewPager: ViewPager2
+    private lateinit var viewPagerAdapter: OnBoardingViewPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

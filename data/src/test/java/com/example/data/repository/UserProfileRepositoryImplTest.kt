@@ -9,12 +9,10 @@ import io.mockk.mockk
 import junit.framework.TestCase
 import kotlinx.coroutines.runBlocking
 
-
-
 class UserProfileRepositoryImplTest : TestCase() {
 
     fun testGetUserProfileCache() = runBlocking {
-        val userId : Long = 123
+        val userId: Long = 123
         val userProfile = mockk<UserProfile>()
         val userProfileCache = mockk<UserProfileCache> {
             coEvery {
@@ -27,13 +25,13 @@ class UserProfileRepositoryImplTest : TestCase() {
         coVerify {
             userProfileCache.getUserProfile(userId)
         }
-        coVerify (exactly = 0){
+        coVerify(exactly = 0) {
             userProfileApi.getUserProfile(userId)
         }
     }
 
     fun testGetUserProfileApi() = runBlocking {
-        val userId : Long = 123
+        val userId: Long = 123
         val userProfile = mockk<UserProfile>()
         val userProfileCache = mockk<UserProfileCache>(relaxed = true) {
             coEvery {
@@ -51,7 +49,7 @@ class UserProfileRepositoryImplTest : TestCase() {
             userProfileApi.getUserProfile(userId)
             userProfileCache.addUserProfile(userId, userProfile)
         }
-        coVerify (exactly = 2){
+        coVerify(exactly = 2) {
             userProfileCache.getUserProfile(userId)
         }
     }

@@ -14,10 +14,10 @@ import kotlinx.coroutines.launch
 class OnBoardViewModel(private val repository: OnBoardDataRepository) : ViewModel() {
 
     private val _internalState = MutableLiveData(InternalState(getDefaultViewState()))
-    val viewState : LiveData<ViewState> = _internalState.map {
+    val viewState: LiveData<ViewState> = _internalState.map {
         it.viewState
     }
-    private val state : InternalState
+    private val state: InternalState
         get() = requireNotNull(_internalState.value)
 
     private val channel = Channel<OnBoardEvent>(Channel.UNLIMITED)
@@ -28,7 +28,7 @@ class OnBoardViewModel(private val repository: OnBoardDataRepository) : ViewMode
             .catch { Log.d(TAG, "event error $it") }
             .onEach {
                 Log.d(TAG, "event $it")
-                when(it) {
+                when (it) {
                     is OnBoardEvent.Init -> handleInit(it)
                     is OnBoardEvent.NextClicked -> handleNextClicked(it)
                 }
@@ -40,20 +40,26 @@ class OnBoardViewModel(private val repository: OnBoardDataRepository) : ViewMode
         _internalState.value = state
     }
 
-    private fun handleInit(event : OnBoardEvent.Init) {
+    private fun handleInit(event: OnBoardEvent.Init) {
         viewModelScope.launch {
-            updateState(state.copy(
-                viewState = state.viewState.copy(
-                    processingViewState = ProcessingViewState.Show
-                )))
+            updateState(
+                state.copy(
+                    viewState = state.viewState.copy(
+                        processingViewState = ProcessingViewState.Show
+                    )
+                )
+            )
 
             val onBoardData = repository.getData(event.viewId)
 
-            updateState(state.copy(
-                viewState = state.viewState.copy(
-                    processingViewState = ProcessingViewState.Hide,
-                    contentViewState = ContentViewState.Show(onBoardData)
-                )))
+            updateState(
+                state.copy(
+                    viewState = state.viewState.copy(
+                        processingViewState = ProcessingViewState.Hide,
+                        contentViewState = ContentViewState.Show(onBoardData)
+                    )
+                )
+            )
         }
     }
 
@@ -61,11 +67,11 @@ class OnBoardViewModel(private val repository: OnBoardDataRepository) : ViewMode
         TODO("Not yet implemented")
     }
 
-    private fun getDefaultViewState() : ViewState {
+    private fun getDefaultViewState(): ViewState {
         return ViewState(ProcessingViewState.Hide, ContentViewState.Hide)
     }
 
-    fun handleEvent(event : OnBoardEvent) {
+    fun handleEvent(event: OnBoardEvent) {
         channel.offer(event)
     }
 
@@ -73,11 +79,12 @@ class OnBoardViewModel(private val repository: OnBoardDataRepository) : ViewMode
 
     data class ViewState(
         val processingViewState: ProcessingViewState,
-        val contentViewState: ContentViewState)
+        val contentViewState: ContentViewState
+    )
 
     sealed class OnBoardEvent {
-        data class Init(val viewId : Int) : OnBoardEvent()
-        data class NextClicked(val currentViewId : Int) : OnBoardEvent()
+        data class Init(val viewId: Int) : OnBoardEvent()
+        data class NextClicked(val currentViewId: Int) : OnBoardEvent()
     }
 
     sealed class ProcessingViewState {
@@ -87,13 +94,10 @@ class OnBoardViewModel(private val repository: OnBoardDataRepository) : ViewMode
 
     sealed class ContentViewState {
         object Hide : ContentViewState()
-        data class Show(val data : OnBoardData) : ContentViewState()
+        data class Show(val data: OnBoardData) : ContentViewState()
     }
 
     companion object {
         const val TAG = "OnBoardViewModel"
     }
 }
-
-
-

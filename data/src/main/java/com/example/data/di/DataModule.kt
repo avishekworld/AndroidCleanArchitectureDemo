@@ -8,8 +8,6 @@ import com.example.domain.api.UserProfileApi
 import com.example.domain.repository.UserProfileRepository
 import org.koin.dsl.module
 
-
-
 val dataModule = module {
 
     single<UserProfileApi> {

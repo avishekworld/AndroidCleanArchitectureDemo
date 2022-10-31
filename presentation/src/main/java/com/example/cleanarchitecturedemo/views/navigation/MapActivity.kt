@@ -12,9 +12,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
-    private val viewModel : NavigationViewModel by viewModel()
-    lateinit var navigationMap : GoogleMap
-    lateinit var binding : ActivityMapsBinding
+    private val viewModel: NavigationViewModel by viewModel()
+    lateinit var navigationMap: GoogleMap
+    lateinit var binding: ActivityMapsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,8 +35,8 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         viewModel.handleEvent(NavigationViewModel.Event.MapInit)
     }
 
-    private fun renderMap(mapState : NavigationViewModel.NavigationMapState) {
-        when(mapState) {
+    private fun renderMap(mapState: NavigationViewModel.NavigationMapState) {
+        when (mapState) {
             is NavigationViewModel.NavigationMapState.Show -> {
                 navigationMap.uiSettings.isZoomGesturesEnabled = mapState.zoomGesturesEnabled
                 navigationMap.uiSettings.isZoomControlsEnabled = mapState.zoomControlsEnabled
@@ -46,11 +46,11 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
             }
             is NavigationViewModel.NavigationMapState.Hide -> {}
             is NavigationViewModel.NavigationMapState.Init -> {}
-            }
+        }
     }
 
-    private fun renderMapMarker(mapMarkerState : NavigationViewModel.MarkerState) {
-        when(mapMarkerState) {
+    private fun renderMapMarker(mapMarkerState: NavigationViewModel.MarkerState) {
+        when (mapMarkerState) {
             is NavigationViewModel.MarkerState.Show -> {
                 val marker = navigationMap.addMarker(mapMarkerState.markerOptions)
                 viewModel.handleEvent(NavigationViewModel.Event.MarkerAdded(marker))
@@ -62,8 +62,8 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    private fun renderPolyLine(polylineState : NavigationViewModel.PolylineState) {
-        when(polylineState) {
+    private fun renderPolyLine(polylineState: NavigationViewModel.PolylineState) {
+        when (polylineState) {
             is NavigationViewModel.PolylineState.Show -> {
                 val polyline = navigationMap.addPolyline(polylineState.polylineOptions)
                 viewModel.handleEvent(NavigationViewModel.Event.PolylineAdded(polyline))

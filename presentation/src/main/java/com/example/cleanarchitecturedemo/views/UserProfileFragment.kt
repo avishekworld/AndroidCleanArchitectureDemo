@@ -12,12 +12,11 @@ import com.example.cleanarchitecturedemo.viewmodels.UserProfileViewState
 import com.example.domain.models.UserProfile
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
 class UserProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentUserProfileBinding
 
-    private val viewModel : UseProfileViewModel by viewModel()
+    private val viewModel: UseProfileViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,7 +30,7 @@ class UserProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.viewState.observe(viewLifecycleOwner) {
-            when(it) {
+            when (it) {
                 is UserProfileViewState.InitState -> {}
                 is UserProfileViewState.ShowProcessingDialog -> showProcessingDialog(it.msg)
                 is UserProfileViewState.HideProcessingDialog -> hideProcessingDialog()
@@ -41,7 +40,7 @@ class UserProfileFragment : Fragment() {
         viewModel.onEvent(UserProfileEvent.GetUserProfile(1))
     }
 
-    private fun showProcessingDialog(msg : String) {
+    private fun showProcessingDialog(msg: String) {
         binding.progressBar.visibility = View.VISIBLE
     }
 
@@ -49,7 +48,7 @@ class UserProfileFragment : Fragment() {
         binding.progressBar.visibility = View.GONE
     }
 
-    private fun showUserProfile(userProfile : UserProfile) {
+    private fun showUserProfile(userProfile: UserProfile) {
         binding.userProfileTextView.text = userProfile.toString()
     }
 }

@@ -12,12 +12,11 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
-
 class UseProfileViewModel(private val getUseProfileUseCase: GetUseProfileUseCase) : ViewModel() {
 
     private val _viewState = MutableLiveData<UserProfileViewState>(UserProfileViewState.InitState)
-    val viewState : LiveData<UserProfileViewState> = _viewState
-    private val state : UserProfileViewState = requireNotNull(viewState.value)
+    val viewState: LiveData<UserProfileViewState> = _viewState
+    private val state: UserProfileViewState = requireNotNull(viewState.value)
 
     private val eventChannel = Channel<UserProfileEvent>(Channel.UNLIMITED)
 
@@ -25,10 +24,11 @@ class UseProfileViewModel(private val getUseProfileUseCase: GetUseProfileUseCase
         eventChannel
             .receiveAsFlow()
             .onEach {
-                when(it) {
-                is UserProfileEvent.Init -> initView()
-                is UserProfileEvent.GetUserProfile ->  getUserProfile(it.id)
-            } }
+                when (it) {
+                    is UserProfileEvent.Init -> initView()
+                    is UserProfileEvent.GetUserProfile -> getUserProfile(it.id)
+                }
+            }
             .launchIn(viewModelScope)
     }
 
@@ -36,7 +36,7 @@ class UseProfileViewModel(private val getUseProfileUseCase: GetUseProfileUseCase
         eventChannel.offer(event)
     }
 
-    private fun updateViewState(state : UserProfileViewState) {
+    private fun updateViewState(state: UserProfileViewState) {
         _viewState.value = state
     }
 
@@ -53,17 +53,16 @@ class UseProfileViewModel(private val getUseProfileUseCase: GetUseProfileUseCase
             }
         }
     }
-
 }
 
 sealed class UserProfileEvent {
     object Init : UserProfileEvent()
-    data class GetUserProfile(val id : Long): UserProfileEvent()
+    data class GetUserProfile(val id: Long) : UserProfileEvent()
 }
 
 sealed class UserProfileViewState {
     object InitState : UserProfileViewState()
-    data class ShowProcessingDialog(val msg : String) : UserProfileViewState()
+    data class ShowProcessingDialog(val msg: String) : UserProfileViewState()
     object HideProcessingDialog : UserProfileViewState()
     data class ShowUserProfile(val userProfile: UserProfile) : UserProfileViewState()
 }

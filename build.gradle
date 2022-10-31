@@ -14,6 +14,7 @@ buildscript {
     ext.kotlin_coroutine_version = '1.4.2'
 
     //androidx
+    ext.androidx_core_ktx_version = "1.2.0"
     ext.android_x_compat_version = '1.2.0'
     ext.android_material_version = '1.2.1'
     ext.android_x_kotlin_ext = '1.3.2'
@@ -30,8 +31,11 @@ buildscript {
     ext.fragment_ktx_version = "1.2.5"
     ext.fragment_version = "1.2.5"
 
+    //Lint
+    ext.ktlint_version = "10.2.1"
+
     /*third party library*/
-    ext.koin_version = "2.2.1"
+    ext.koin_version = "2.2.3"
 
     /*Test libraries*/
     ext.mockk_version = '1.10.3-jdk8'
@@ -45,9 +49,10 @@ buildscript {
 
     dependencies {
         classpath 'com.android.tools.build:gradle:4.1.1'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.20"
         classpath 'com.google.gms:google-services:4.3.8'
         classpath "com.google:plugin:0.6"
+        classpath "org.jlleitschuh.gradle:ktlint-gradle:$ktlint_version"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -56,14 +61,18 @@ buildscript {
 
 plugins {
     id("com.google.secrets_gradle_plugin") version "0.6"
+    id("org.jlleitschuh.gradle.ktlint") version "$ktlint_version"
 }
 
 allprojects {
     repositories {
         google()
-        jcenter()
-        
+        mavenCentral()
+        flatDir {
+            dirs 'libs'
+        }
     }
+    apply plugin: "org.jlleitschuh.gradle.ktlint"
 }
 
 task clean(type: Delete) {

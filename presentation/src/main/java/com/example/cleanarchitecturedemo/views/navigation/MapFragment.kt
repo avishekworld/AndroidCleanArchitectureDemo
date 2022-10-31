@@ -9,7 +9,7 @@ import com.example.cleanarchitecturedemo.databinding.FragmentMapsBinding
 
 class MapFragment : Fragment() {
 
-    lateinit var binding : FragmentMapsBinding
+    lateinit var binding: FragmentMapsBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

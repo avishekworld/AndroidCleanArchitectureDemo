@@ -2,11 +2,9 @@ package com.example.data.cache
 
 import com.example.domain.models.UserProfile
 
-
-
 interface UserProfileCache {
-    suspend fun getUserProfile(id : Long) : UserProfile?
-    suspend fun addUserProfile(id : Long, userProfile: UserProfile)
+    suspend fun getUserProfile(id: Long): UserProfile?
+    suspend fun addUserProfile(id: Long, userProfile: UserProfile)
 }
 
 class UserProfileCacheInMemory : UserProfileCache {
