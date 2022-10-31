@@ -8,8 +8,12 @@ import com.example.data.api.UserProfileApiImpl
 import com.example.data.cache.UserProfileCache
 import com.example.data.cache.UserProfileCacheInMemory
 import com.example.data.repository.UserProfileRepositoryImpl
+import com.example.data.weather.WeatherApi
+import com.example.data.weather.WeatherApiImpl
+import com.example.data.weather.WeatherRepositoryImpl
 import com.example.domain.api.UserProfileApi
 import com.example.domain.repository.UserProfileRepository
+import com.example.domain.weather.WeatherRepository
 import org.koin.dsl.module
 
 val dataModule = module {
@@ -32,5 +36,13 @@ val dataModule = module {
 
     single<OnBoardDataRepository> {
         OnBoardDataRepositoryImpl(get())
+    }
+
+    single<WeatherRepository> {
+        WeatherRepositoryImpl(weatherApi = get(), coroutineDispatchers = get())
+    }
+
+    single<WeatherApi> {
+        WeatherApiImpl()
     }
 }

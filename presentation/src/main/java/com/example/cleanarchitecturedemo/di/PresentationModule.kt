@@ -1,5 +1,6 @@
 package com.example.cleanarchitecturedemo.di
 
+import com.example.cleanarchitecturedemo.feature.weather.WeatherViewModel
 import com.example.cleanarchitecturedemo.viewmodels.OnBoardViewModel
 import com.example.cleanarchitecturedemo.viewmodels.UseProfileViewModel
 import com.example.cleanarchitecturedemo.views.navigation.NavigationViewModel
@@ -19,5 +20,12 @@ val presentationModule = module {
 
     viewModel {
         NavigationViewModel(androidContext())
+    }
+
+    viewModel {
+        WeatherViewModel(
+            getWeatherUseCase = get(),
+            logger = get()
+        )
     }
 }

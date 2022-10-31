@@ -47,6 +47,9 @@ buildscript {
 
     /*third party library*/
     ext.koin_version = "2.2.3"
+    ext.okhttp_version = "4.9.0"
+    ext.retrofit_version = "2.9.0"
+    ext.moshi_version = "1.12.0"
 
     /*Test libraries*/
     ext.mockk_version = '1.10.3-jdk8'
