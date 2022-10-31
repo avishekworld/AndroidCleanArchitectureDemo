@@ -33,7 +33,7 @@ class UseProfileViewModel(private val getUseProfileUseCase: GetUseProfileUseCase
     }
 
     fun onEvent(event: UserProfileEvent) {
-        eventChannel.offer(event)
+        eventChannel.trySend(event)
     }
 
     private fun updateViewState(state: UserProfileViewState) {

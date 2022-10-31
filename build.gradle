@@ -2,34 +2,45 @@
 
 buildscript {
 
-    /*tools*/
-    ext.compile_sdk_version = 29
-    ext.build_tools_version = '28.0.3'
-    ext.min_sdk_version = 29
-    ext.target_sdk_version = 29
+    //sdk build min_sdk target_sdk
+    ext.compile_sdk_version = 31
+    ext.build_tool_version = "31.0.0"
+    ext.min_sdk_version = 27
+    ext.target_sdk_version = 31
 
     //kotlin
-    ext.kotlin_core_version = '1.1.0'
-    ext.kotlin_version = '1.4.21'
-    ext.kotlin_coroutine_version = '1.4.2'
+    ext.kotlin_version = "1.6.10"
+    ext.kotlin_coroutine_version = "1.6.3"
+
+    ext.build_gradle_version = '7.2.1'
+    ext.gradle_secret_plugin_version = "2.0.1"
 
     //androidx
-    ext.androidx_core_ktx_version = "1.2.0"
-    ext.android_x_compat_version = '1.2.0'
+    ext.androidx_core_ktx_version = "1.8.0"
+    ext.androidx_appcompat_version = "1.4.2"
     ext.android_material_version = '1.2.1'
-    ext.android_x_kotlin_ext = '1.3.2'
-    ext.android_x_lifecycle_version = "2.2.0"
+    ext.androidx_lifecycle_version = "2.5.0"
+    ext.androidx_fragment_version = "1.4.1"
     ext.constraint_layout_version = "2.0.4"
+    ext.androidx_navigation_version = "2.4.2"
+    ext.androidx_preference_ktx_version = "1.2.0"
+    ext.androidx_annotation_version = "1.4.0"
     ext.card_layout_version = "1.0.0"
 
-    //play services
+    // jetpack compose
+    ext.jetpack_compose_version = "1.1.1"
+    ext.jetpack_compose_accompanist_version = "0.23.1"
+    ext.jetpack_compose_material_dialog_version = "0.7.2"
+    ext.jetpack_compose_lifecycle_version = "2.5.0"
+
+    //google, play & firebase services
+    ext.google_services_version = '4.3.10'
     ext.google_play_services_location_version = "18.0.0"
     ext.google_play_services_maps_version = "17.0.1"
 
     /*jetpack*/
     ext.lifecycle_version = "2.2.0"
     ext.fragment_ktx_version = "1.2.5"
-    ext.fragment_version = "1.2.5"
 
     //Lint
     ext.ktlint_version = "10.2.1"
@@ -48,10 +59,10 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.1'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.20"
-        classpath 'com.google.gms:google-services:4.3.8'
-        classpath "com.google:plugin:0.6"
+        classpath "com.android.tools.build:gradle:$build_gradle_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "com.google.gms:google-services:$google_services_version"
+        classpath "com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin:$gradle_secret_plugin_version"
         classpath "org.jlleitschuh.gradle:ktlint-gradle:$ktlint_version"
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -60,17 +71,14 @@ buildscript {
 }
 
 plugins {
-    id("com.google.secrets_gradle_plugin") version "0.6"
     id("org.jlleitschuh.gradle.ktlint") version "$ktlint_version"
+    id 'org.jetbrains.kotlin.android' version '1.6.10' apply false
 }
 
 allprojects {
     repositories {
         google()
         mavenCentral()
-        flatDir {
-            dirs 'libs'
-        }
     }
     apply plugin: "org.jlleitschuh.gradle.ktlint"
 }

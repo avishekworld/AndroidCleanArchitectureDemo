@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.cleanarchitecturedemo">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:name=".core.MyApp"
         android:allowBackup="true"
@@ -14,23 +16,32 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="${MAPS_API_KEY}" />
 
-        <activity android:name=".views.navigation.MapActivity">
-            <!--android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"-->
-            android:screenOrientation="portrait">
+        <activity
+            android:name=".feature.weather.WeatherActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".views.UserProfileActivity" />
-        <activity android:name=".views.onboarding.OnBoardActivity" />
-    </application>
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+        <activity
+            android:name=".views.navigation.MapActivity"
+            android:exported="false">
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity
+            android:name=".views.UserProfileActivity"
+            android:exported="false"></activity>
+
+        <activity
+            android:name=".views.onboarding.OnBoardActivity"
+            android:exported="false"></activity>
+    </application>
 
 </manifest>

@@ -2,10 +2,18 @@ package com.example.cleanarchitecturedemo.views.navigation
 
 import android.content.Context
 import android.util.Log
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.map
+import androidx.lifecycle.viewModelScope
 import com.example.cleanarchitecturedemo.R
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.model.*
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
+import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.Polyline
+import com.google.android.gms.maps.model.PolylineOptions
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
@@ -42,7 +50,7 @@ class NavigationViewModel(private val context: Context) : ViewModel() {
     }
 
     fun handleEvent(event: Event) {
-        channel.offer(event)
+        channel.trySend(event)
     }
 
     private fun updateState(internalState: InternalState) {

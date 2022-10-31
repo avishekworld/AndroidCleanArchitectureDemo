@@ -1,7 +1,11 @@
 package com.example.cleanarchitecturedemo.viewmodels
 
 import android.util.Log
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.map
+import androidx.lifecycle.viewModelScope
 import com.example.data.api.OnBoardDataRepository
 import com.example.data.model.OnBoardData
 import kotlinx.coroutines.channels.Channel
@@ -72,7 +76,7 @@ class OnBoardViewModel(private val repository: OnBoardDataRepository) : ViewMode
     }
 
     fun handleEvent(event: OnBoardEvent) {
-        channel.offer(event)
+        channel.trySend(event)
     }
 
     private data class InternalState(val viewState: ViewState)
